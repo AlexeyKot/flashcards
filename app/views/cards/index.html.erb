@@ -6,7 +6,9 @@
     <div class="text-center">
       <% @cards.each do |card| %>
       <div style="border: 1px solid #e2e2e2; border-radius: 5px; padding: 10px; margin: 10px;">
-          <i><%= card.original_text %></i> |
+      <%= I18n.localize(card.review_date.to_date, :format => :myformat) %>
+          <span style="display: block;"><%= card.review_date %></span>
+          <strong><%= card.original_text %></strong> |
           <%= card.translated_text %>
       </div>
       <% end %>
