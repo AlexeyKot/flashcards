@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <div class="text-center">
+      <div class="card">
+          <p><%= I18n.localize(@card.review_date.to_date, :format => :myformat) %></p>
+          <p><strong><%= @card.original_text %></strong> |
+          <%= @card.translated_text %></p>
+          <p><%= link_to 'удалить', card_path(@card),
+              method: :delete,
+              data: { confirm: 'Вы действительно хотите удалить карточку?' } %></p>
+      </div>
+    </div>
+  </div>
+</div>
