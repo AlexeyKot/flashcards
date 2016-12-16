@@ -1,0 +1,6 @@
+<h1 class="text-center">Добавить карточку</h1>
+<%= simple_form_for @card do |f| %>
+  <%= f.input :original_text, label: 'Слово на английском', error: 'Поле обязательно к заполнению' %>
+  <%= f.input :translated_text, label: 'Перевод слова на русский', error: 'Поле обязательно к заполнению' %>
+  <%= f.submit 'Создать' %>
+<% end %>

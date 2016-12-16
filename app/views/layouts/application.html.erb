@@ -18,12 +18,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Флэшкарточкер</a>
+          <%= link_to 'Флэшкарточкер', { controller: 'cards' }, class: 'navbar-brand'  %>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#">Главная</a></li>
             <li><%= link_to 'Все карточки', controller: 'cards' %></li>
+            <li><%= link_to 'Добавить карточку', new_card_path %></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
