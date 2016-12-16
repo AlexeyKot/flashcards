@@ -1,0 +1,6 @@
+<div class="card">
+            <p><%= I18n.localize(card.review_date.to_date, :format => :myformat) %></p>
+            <p><strong><%= card.original_text %></strong> |
+            <%= card.translated_text %></p>
+            <p><%= link_to 'изменить', edit_card_path(card) %></p>
+        </div>
