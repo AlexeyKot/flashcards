@@ -1,0 +1,14 @@
+<h1 class="text-center">Изменить карточку</h1>
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+<%= simple_form_for @card do |f| %>
+  <%= f.input :original_text, label: 'Слово на английском', error: 'Поле обязательно к заполнению' %>
+  <%= f.input :translated_text, label: 'Перевод слова на русский', error: 'Поле обязательно к заполнению' %>
+  <%= f.submit 'Изменить' %>
+  <%= link_to 'удалить', card_path(@card), class: 'link_remove',
+              method: :delete,
+              data: { confirm: 'Вы действительно хотите удалить карточку?' } %>
+<% end %>
+<p></p>
+</div>
+</div>
