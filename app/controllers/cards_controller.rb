@@ -1,4 +1,6 @@
 class CardsController < ApplicationController
+before_action :get_params
+skip_before_action :get_params, only: [:new, :create, :index]
 	def index
 		@cards = Card.all
 	end
@@ -8,7 +10,6 @@ class CardsController < ApplicationController
 	end
 
 	def edit
-		@card = Card.find(params[:id])
 	end
 
 	def create
@@ -19,7 +20,6 @@ class CardsController < ApplicationController
   	end
 
 	def update
-		@card = Card.find(params[:id])
 		if @card.update(card_params)
 			redirect_to @card
 		else
@@ -28,17 +28,19 @@ class CardsController < ApplicationController
 	end
 
 	def show
-		@card = Card.find(params[:id])
 	end
 
 	def destroy
-		@card = Card.find(params[:id])
 		@card.destroy
 
 		redirect_to cards_path
 	end
 
 	private
+		def get_params
+			@card = Card.find(params[:id])
+		end
+
 		def card_params
 			params.require(:card).permit(:original_text, :translated_text)
   		end
