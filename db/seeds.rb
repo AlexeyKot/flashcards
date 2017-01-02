@@ -17,7 +17,7 @@ page = agent.get("http://www.languagedaily.com/learn-german/vocabulary/common-ge
 counter = 0
 crawl_links = page.links_with(href: /german-words/)
 crawled_pages = crawl_links.map do |link|
-	crawl_page = link.click.search('.jsn-article-content tbody tr[class^="row"]').each do |a|
+	link.click.search('.jsn-article-content tbody tr[class^="row"]').each do |a|
 		english_word = a.search('td[3]').text.gsub(160.chr("UTF-8"),"")
 		german_word = a.search('td[2]').text.gsub(160.chr("UTF-8"),"")
 		if !english_word.to_s.empty?
