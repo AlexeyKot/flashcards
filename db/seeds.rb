@@ -8,22 +8,46 @@
 
 require "nokogiri"
 require "open-uri"
+require 'mechanize'
+require 'date'
+require 'json'
 
-url = "http://www.languagedaily.com/learn-german/vocabulary/common-german-words-7"
-page = open(url)
-parse_page = Nokogiri::HTML(page)
+agent = Mechanize.new
+page = agent.get("http://www.languagedaily.com/learn-german/vocabulary/common-german-words")
 counter = 0
-parse_page.css('.jsn-article-content').css('tbody').css('tr.rowA, tr.rowB').each do |a|
-	english_word = a.css('td[3]').text.gsub(160.chr("UTF-8"),"")
-	german_word = a.css('td[2]').text.gsub(160.chr("UTF-8"),"")
-	if !english_word.to_s.empty?
-		Card.create(original_text: german_word, translated_text: english_word)
-		counter+=1
+crawl_links = page.links_with(href: /german-words/)
+crawled_pages = crawl_links.map do |link|
+	crawl_page = link.click.search('.jsn-article-content tbody tr[class^="row"]').each do |a|
+		english_word = a.search('td[3]').text.gsub(160.chr("UTF-8"),"")
+		german_word = a.search('td[2]').text.gsub(160.chr("UTF-8"),"")
+		if !english_word.to_s.empty?
+			Card.create(original_text: german_word, translated_text: english_word)
+			counter+=1
+		end
 	end
 end
+
 if counter > 0
 	puts "Added " + counter.to_s + " records to database"
 else
 	puts "Something went wrong or nothing to add to database"
 end
+
+# url = "http://www.languagedaily.com/learn-german/vocabulary/common-german-words-7"
+# page = open(url)
+# parse_page = Nokogiri::HTML(page)
+# counter = 0
+# parse_page.css('.jsn-article-content').css('tbody').css('tr.rowA, tr.rowB').each do |a|
+# 	english_word = a.css('td[3]').text.gsub(160.chr("UTF-8"),"")
+# 	german_word = a.css('td[2]').text.gsub(160.chr("UTF-8"),"")
+# 	if !english_word.to_s.empty?
+# 		Card.create(original_text: german_word, translated_text: english_word)
+# 		counter+=1
+# 	end
+# end
+# if counter > 0
+# 	puts "Added " + counter.to_s + " records to database"
+# else
+# 	puts "Something went wrong or nothing to add to database"
+# end
 
