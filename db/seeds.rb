@@ -16,7 +16,7 @@ agent = Mechanize.new
 page = agent.get("http://www.languagedaily.com/learn-german/vocabulary/common-german-words")
 counter = 0
 crawl_links = page.links_with(href: /german-words/)
-crawled_pages = crawl_links.map do |link|
+crawl_links.map do |link|
 	link.click.search('.jsn-article-content tbody tr[class^="row"]').each do |a|
 		english_word = a.search('td[3]').text.gsub(160.chr("UTF-8"),"")
 		german_word = a.search('td[2]').text.gsub(160.chr("UTF-8"),"")
