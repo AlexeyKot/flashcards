@@ -50,4 +50,3 @@ end
 # else
 # 	puts "Something went wrong or nothing to add to database"
 # end
-
