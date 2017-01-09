@@ -1,7 +1,11 @@
 class CardsController < ApplicationController
 before_action :get_params
-skip_before_action :get_params, only: [:new, :create, :index]
+skip_before_action :get_params, only: [:new, :create, :index, :random]
 	def index
+		@cards = Card.all
+	end
+
+	def random
 		@cards = Card.all
 	end
 
