@@ -1,6 +1,6 @@
 class CardsController < ApplicationController
-before_action :get_params
-skip_before_action :get_params, only: [:new, :create, :index, :random, :check]
+	before_action :get_params
+	skip_before_action :get_params, only: [:new, :create, :index, :random, :check]
 	def index
 		@cards = Card.all
 	end
@@ -18,10 +18,10 @@ skip_before_action :get_params, only: [:new, :create, :index, :random, :check]
 
 	def create
 		@card = Card.new(card_params)
- 
+
 		@card.save
 		redirect_to @card
-  	end
+	end
 
 	def update
 		if @card.update(card_params)
@@ -45,20 +45,20 @@ skip_before_action :get_params, only: [:new, :create, :index, :random, :check]
 		@card = Card.find(params[:check][:id])
 		answer = params[:check][:answer]
 		if answer == @card.original_text
-			@сard.update(review_date: Date.today + 3.days)
-			flash[:success] = 'Правильный ответ! Следующая проверка: ' + @card.review_date.strftime("%d/%m/%Y").to_s
+			@card.update(review_date: Date.today + 3.days)
+			flash[:success] = "Правильный ответ! Следующая проверка: " + @card.review_date.to_s
 		else
-			flash[:danger] = 'Вы неправильно перевели предыдущую карточку!'
+			flash[:danger] = "Вы неправильно перевели предыдущую карточку!"
 		end
 		redirect_to root_path
 	end
 
 	private
-		def get_params
-			@card = Card.find(params[:id])
-		end
+	def get_params
+		@card = Card.find(params[:id])
+	end
 
-		def card_params
-			params.require(:card).permit(:original_text, :translated_text)
-  		end
+	def card_params
+		params.require(:card).permit(:original_text, :translated_text)
+	end
 end
