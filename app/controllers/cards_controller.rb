@@ -1,12 +1,12 @@
 class CardsController < ApplicationController
 before_action :get_params
-skip_before_action :get_params, only: [:new, :create, :index, :random]
+skip_before_action :get_params, only: [:new, :create, :index, :random, :check]
 	def index
 		@cards = Card.all
 	end
 
 	def random
-		@cards = Card.all
+		@card = Card.expired.random
 	end
 
 	def new
@@ -25,6 +25,7 @@ skip_before_action :get_params, only: [:new, :create, :index, :random]
 
 	def update
 		if @card.update(card_params)
+			flash[:success] = 'Карточка изменена'
 			redirect_to @card
 		else
 			render 'edit'
@@ -38,6 +39,18 @@ skip_before_action :get_params, only: [:new, :create, :index, :random]
 		@card.destroy
 
 		redirect_to cards_path
+	end
+
+	def check
+		@card = Card.find(params[:check][:id])
+		answer = params[:check][:answer]
+		if answer == @card.original_text
+			@сard.update(review_date: Date.today + 3.days)
+			flash[:success] = 'Правильный ответ! Следующая проверка: ' + @card.review_date.strftime("%d/%m/%Y").to_s
+		else
+			flash[:danger] = 'Вы неправильно перевели предыдущую карточку!'
+		end
+		redirect_to root_path
 	end
 
 	private

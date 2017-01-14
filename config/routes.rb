@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :cards
+  resources :cards do
+  	collection do
+  		post 'check'
+  	end
+  end
   root 'cards#random'
   get 'static_pages/home'
 
