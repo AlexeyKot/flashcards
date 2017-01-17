@@ -3,11 +3,15 @@ class Card < ApplicationRecord
 	validates :translated_text, presence: true, length: { minimum: 2 }
 	validate :original_not_equal_to_translated?
 
-	scope :expired, -> { where ("review_date <= '#{Date.today}'") }
+	scope :expired, -> { where('review_date <= ?', DateTime.current) }
 	scope :random, -> { order("RANDOM()").first }
 
 	before_create do
 		self.review_date = Date.today+3.day
+	end
+
+	def set_review_date(i)
+		self.review_date = Date.today + i.days
 	end
 
 	private
