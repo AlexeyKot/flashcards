@@ -16,7 +16,7 @@ class Card < ApplicationRecord
 
 	private
 	def original_not_equal_to_translated?
-		if (self.original_text.strip.downcase == self.translated_text.strip.downcase)
+		if (self.original_text.to_s.strip.downcase == self.translated_text.to_s.strip.downcase)
 			errors.add(:original_text, "слово не может быть одинаковым с переводом")
 			errors.add(:translated_text, "перевод не может быть таким же как слово")
 		end
