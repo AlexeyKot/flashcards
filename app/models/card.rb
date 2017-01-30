@@ -10,8 +10,8 @@ class Card < ApplicationRecord
 		self.review_date = Date.today+3.day
 	end
 
-	def set_review_date(i)
-		self.review_date = Date.today + i.days
+	def set_review_date(inputDate)
+		self.review_date = Date.today + inputDate.days
 	end
 
 	private
