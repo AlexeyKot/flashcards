@@ -41,9 +41,13 @@ class CardsController < ApplicationController
 	end
 
 	def destroy
-		@card.destroy
-		flash[:success] = 'Карточка удалена'
+		if @card.destroy
+			flash[:success] = 'Карточка удалена'
+		else
+			flash[:warning] = 'Не удалось удалить карточку'
+		end
 		redirect_to cards_path
+		
 	end
 
 	def check
