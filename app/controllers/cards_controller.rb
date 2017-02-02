@@ -17,17 +17,22 @@ class CardsController < ApplicationController
 	end
 
 	def create
-		@card = Card.new(card_params)
-
-		@card.save
-		redirect_to @card
+		@card = Card.create(card_params)
+		if @card.valid?
+			flash[:success] = 'Карточка создана'
+			redirect_to @card
+		else
+			flash[:danger] = 'Ошибка при создании карты'
+			render 'new'
+		end
 	end
 
 	def update
 		if @card.update(card_params)
-			flash[:success] = 'Карточка изменена'
+			flash[:success] = 'Карточка обновлена'
 			redirect_to @card
 		else
+			flash[:danger] = 'Ошибка при обновлении карты'
 			render 'edit'
 		end
 	end

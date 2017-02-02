@@ -7,8 +7,9 @@ class Card < ApplicationRecord
 	scope :random, -> { order('RANDOM()') }
 
 	before_create do
-		self.review_date = Date.today+3.day
+		self.set_review_date(0)
 	end
+	
 
 	def set_review_date(inputDate)
 		self.review_date = Date.today + inputDate.days
