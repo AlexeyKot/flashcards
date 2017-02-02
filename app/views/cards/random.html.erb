@@ -11,7 +11,7 @@
             <%= simple_form_for(:check, :url => check_cards_path) do |f| %>
                 <%= f.input :answer, label: false, placeholder: 'Ваш перевод', error: 'Поле обязательно к заполнению' %>
                 <%= f.hidden_field :id, value: @card.id %>
-                <%= f.submit 'Изменить' %>
+                <%= f.submit 'Проверить' %>
             <% end %>
             <% else %>
             <h1>Вы запомнили все карточки на сегодня</h1>
