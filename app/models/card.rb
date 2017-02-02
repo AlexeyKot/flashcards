@@ -1,25 +1,24 @@
 class Card < ApplicationRecord
 	validates :original_text, presence: true, uniqueness: true, length: { minimum: 2 }
 	validates :translated_text, presence: true, length: { minimum: 2 }
-	validate :original_not_equal_to_translated?
+	validate :same_words?
 
 	scope :expired, -> { where('review_date <= ?', Date.today) }
 	scope :random, -> { order('RANDOM()') }
 
 	before_create do
-		self.set_review_date(0)
+		self.review_date = Date.today
 	end
-	
 
-	def set_review_date(inputDate)
-		self.review_date = Date.today + inputDate.days
+
+	def add_to_review_date(number)
+		self.review_date = Date.today + number.days
 	end
 
 	private
-	def original_not_equal_to_translated?
+	def same_words?
 		if (self.original_text.to_s.strip.downcase == self.translated_text.to_s.strip.downcase)
-			errors.add(:original_text, "слово не может быть одинаковым с переводом")
-			errors.add(:translated_text, "перевод не может быть таким же как слово")
+			errors.add(:original_text, "слова должны отличаться")
 		end
 	end
 end
