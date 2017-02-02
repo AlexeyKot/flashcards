@@ -22,7 +22,7 @@ class CardsController < ApplicationController
 			flash[:success] = 'Карточка создана'
 			redirect_to @card
 		else
-			flash[:danger] = 'Ошибка при создании карты'
+			flash[:danger] = 'Ошибка при создании карты' 
 			render 'new'
 		end
 	end
@@ -42,7 +42,7 @@ class CardsController < ApplicationController
 
 	def destroy
 		@card.destroy
-
+		flash[:success] = 'Карточка удалена'
 		redirect_to cards_path
 	end
 
