@@ -19,8 +19,8 @@ describe Card, type: :model do
 		expect(card).to be_valid
 	end
 
-	it "should add right number of days" do
-		subject.add_to_review_date(3)
+	it "should move review date to 3 days" do
+		subject.move_review_date
 		expect(subject.review_date).to eq(Date.today + 3.days)
 	end
 end

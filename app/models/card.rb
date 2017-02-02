@@ -11,8 +11,9 @@ class Card < ApplicationRecord
 	end
 
 
-	def add_to_review_date(number)
-		self.review_date = Date.today + number.days
+	def move_review_date
+		self.review_date = Date.today + 3.days
+		self.save
 	end
 
 	private
