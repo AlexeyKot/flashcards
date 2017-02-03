@@ -23,4 +23,9 @@ describe Card, type: :model do
 		subject.move_review_date
 		expect(subject.review_date).to eq(Date.today + 3.days)
 	end
+
+	it "should check user's answer" do
+		  card = Card.new(original_text: "hause")
+  		  expect(card.check_translation("battlestart")).to be false
+  	end
 end
