@@ -14,11 +14,6 @@ describe Card, type: :model do
 		expect(card).to be_invalid
 	end
 
-	it "should successfully create card" do
-		card = Card.create(original_text: "Cat", translated_text: "Кошка")
-		expect(card).to be_valid
-	end
-
 	it "should move review date to 3 days" do
 		subject.move_review_date
 		expect(subject.review_date).to eq(Date.today + 3.days)
