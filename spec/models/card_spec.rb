@@ -19,8 +19,9 @@ describe Card, type: :model do
 		expect(subject.review_date).to eq(Date.today + 3.days)
 	end
 
-	it "should check user's answer" do
-		  card = Card.new(original_text: "hause")
-  		  expect(card.check_translation("battlestart")).to be false
-  	end
+	context	"When checking user answer" do
+		subject { Card.new(original_text: "hause")}
+		it { expect(subject.check_translation("battlestart")).to be false }
+		it { expect(subject.check_translation("hause")).to be true }
+	end
 end
