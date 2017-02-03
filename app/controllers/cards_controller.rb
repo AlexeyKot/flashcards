@@ -53,8 +53,7 @@ class CardsController < ApplicationController
 	def check
 		@card = Card.find(params[:check][:id])
 		answer = params[:check][:answer]
-		if answer == @card.original_text
-			@card.move_review_date
+		if @card.has_correct(answer)
 			flash[:success] = "Правильный ответ! Следующая проверка: " + @card.review_date.to_s
 		else
 			flash[:danger] = "Вы неправильно перевели предыдущую карточку!"

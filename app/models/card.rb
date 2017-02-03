@@ -16,6 +16,12 @@ class Card < ApplicationRecord
 		self.save
 	end
 
+	def has_correct(answer)
+		if (answer.to_s.strip.downcase == self.original_text.to_s.strip.downcase)
+			self.move_review_date
+		end
+	end
+
 	private
 	def same_words?
 		if (self.original_text.to_s.strip.downcase == self.translated_text.to_s.strip.downcase)
