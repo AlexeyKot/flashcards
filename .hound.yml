@@ -4,3 +4,5 @@ StringLiterals:
   Enabled: false
 Metrics/LineLength:
   Max: 100
+Style/Tab:
+  Enabled: false
