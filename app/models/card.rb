@@ -17,12 +17,7 @@ class Card < ApplicationRecord
 	end
 
 	def check_translation(answer)
-		if (answer.to_s.strip.downcase == self.original_text.to_s.strip.downcase)
-			self.move_review_date
-			true
-		else
-			false
-		end
+		answer.to_s.strip.downcase == self.original_text.to_s.strip.downcase
 	end
 
 	private

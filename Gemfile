@@ -44,7 +44,7 @@ end
 
 group :test do
   gem 'shoulda-matchers', require: false
-   gem 'database_cleaner', '~> 1.5'
+  gem 'capybara'
 end
 
 group :development do
