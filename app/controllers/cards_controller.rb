@@ -6,7 +6,7 @@ class CardsController < ApplicationController
 	end
 
 	def random
-		@card = Card.expired.random
+		@card = Card.expired.random.first
 	end
 
 	def new
@@ -17,17 +17,22 @@ class CardsController < ApplicationController
 	end
 
 	def create
-		@card = Card.new(card_params)
-
-		@card.save
-		redirect_to @card
+		@card = Card.create(card_params)
+		if @card.persisted?
+			flash[:success] = 'Карточка создана'
+			redirect_to @card
+		else
+			flash[:danger] = 'Ошибка при создании карты' 
+			render 'new'
+		end
 	end
 
 	def update
 		if @card.update(card_params)
-			flash[:success] = 'Карточка изменена'
+			flash[:success] = 'Карточка обновлена'
 			redirect_to @card
 		else
+			flash[:danger] = 'Ошибка при обновлении карты'
 			render 'edit'
 		end
 	end
@@ -36,16 +41,20 @@ class CardsController < ApplicationController
 	end
 
 	def destroy
-		@card.destroy
-
+		if @card.destroy
+			flash[:success] = 'Карточка удалена'
+		else
+			flash[:warning] = 'Не удалось удалить карточку'
+		end
 		redirect_to cards_path
+		
 	end
 
 	def check
 		@card = Card.find(params[:check][:id])
 		answer = params[:check][:answer]
-		if answer == @card.original_text
-			@card.set_review_date(3)
+		if @card.check_translation(answer)
+			@card.move_review_date
 			flash[:success] = "Правильный ответ! Следующая проверка: " + @card.review_date.to_s
 		else
 			flash[:danger] = "Вы неправильно перевели предыдущую карточку!"

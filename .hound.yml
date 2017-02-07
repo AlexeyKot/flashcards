@@ -1,6 +1,8 @@
 Style/FrozenStringLiteralComment:
-  Enabled: false
+  Enabled: true
 StringLiterals:
-  Enabled: false
+  Enabled: true
 Metrics/LineLength:
   Max: 100
+Style/Tab:
+  Enabled: true
