@@ -18,7 +18,7 @@ class CardsController < ApplicationController
 
 	def create
 		@card = Card.create(card_params)
-		if @card.valid?
+		if @card.persisted?
 			flash[:success] = 'Карточка создана'
 			redirect_to @card
 		else
