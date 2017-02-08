@@ -1,5 +1,5 @@
 Style/FrozenStringLiteralComment:
-  Enabled: true
+  Enabled: false
 StringLiterals:
   Enabled: true
 Metrics/LineLength:
