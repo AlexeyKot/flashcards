@@ -1,6 +1,8 @@
 require 'rails_helper'
 
-describe Card, type: :model do 
+describe Card, type: :model do
+
+	it { should belong_to :user }
 
 	it "shouldn't contain same pair of words" do
 		card = Card.create(original_text: "Cat ", translated_text: "  cat")

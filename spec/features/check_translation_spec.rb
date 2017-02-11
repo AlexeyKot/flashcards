@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 feature "Check translation", type: :feature do
-  let!(:card) { Card.create(original_text: "hat", translated_text: "шапка", review_date: (Date.today - 3.days)) }
+  let!(:user) { User.create(email: "example@local.host", password: "12345678" )}
+  let!(:card) { Card.create(original_text: "hat", translated_text: "шапка", review_date: (Date.today - 3.days), user: user) }
   scenario "successfully" do
     visit root_path
     fill_in "check_answer", with: "hat"
