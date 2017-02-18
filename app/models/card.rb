@@ -1,4 +1,5 @@
 class Card < ApplicationRecord
+	belongs_to :user
 	validates :original_text, presence: true, uniqueness: true, length: { minimum: 2 }
 	validates :translated_text, presence: true, length: { minimum: 2 }
 	validate :same_words?
