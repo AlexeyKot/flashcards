@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     def create
         @user = User.create(user_params)
         if @user.persisted?
-            flash[:success] = 'Карточка создана'
+            flash[:success] = 'Вы успешно зарегистрировались'
 			redirect_to root_path
         else
             render 'new'
