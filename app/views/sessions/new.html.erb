@@ -5,9 +5,9 @@
 			<h1>Войти</h1>
 		</div>
 		<%= simple_form_for(:session, :url => sessions_path) do |f| %>
-		<%= f.input :email, label: false, placeholder: 'Ваш эл.адрес', error: 'Поле обязательно к заполнению' %>
-		<%= f.input :password, label: false, placeholder: 'Пароль', error: 'Поле обязательно к заполнению' %>
-		<%= f.submit 'Войти' %>
+			<%= f.input :email, input_html: { name: "email" }, label: false, placeholder: 'Ваш эл.адрес', error: 'Поле обязательно к заполнению' %>
+			<%= f.input :password, input_html: { name: "password" }, label: false, placeholder: 'Пароль', error: 'Поле обязательно к заполнению' %>
+			<%= f.submit 'Войти' %>
 		<% end %>
 	</div>
 </div>
