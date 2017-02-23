@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 	end
 
 	def create
-		if login(params[:email], params[:password])
+		if login(params[:email], params[:password], params[:remember_me])
 			flash[:success] = 'С возвращением!'
 			redirect_back_or_to root_path
 		else
@@ -18,4 +18,5 @@ class SessionsController < ApplicationController
 		flash[:success] = 'До свидания!'
 		redirect_to log_in_path
 	end
+
 end
