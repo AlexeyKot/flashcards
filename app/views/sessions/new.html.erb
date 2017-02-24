@@ -10,6 +10,7 @@
 			<%= f.input :remember_me, as: :boolean, inline_label: 'Запомнить меня', input_html: { name: "remember_me" } %>
 			<%= f.submit 'Войти' %>
 		<% end %>
+		<%= link_to 'Login with Twitter', auth_at_provider_path(:provider => :twitter) %> | 
 	</div>
 </div>
 </div>

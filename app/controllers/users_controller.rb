@@ -7,8 +7,9 @@ class UsersController < ApplicationController
     def create
         @user = User.create(user_params)
         if @user.persisted?
+            login(user_params[:email], user_params[:password])
             flash[:success] = 'Вы успешно зарегистрировались'
-			redirect_to root_path
+			      redirect_to root_path
         else
             render 'new'
         end
