@@ -35,6 +35,7 @@ gem 'nokogiri'
 gem 'mechanize'
 gem 'sorcery'
 gem 'validates_email_format_of'
+gem "figaro"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
