@@ -103,8 +103,8 @@ Rails.application.config.sorcery.configure do |config|
   # config.twitter.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=twitter"
   # config.twitter.user_info_mapping = {:email => "screen_name"}
   #
-  config.twitter.key = "uOEYqLuI1vD75ndbIG7mmj5VY"
-  config.twitter.secret = "wadGqQdVwCAYzDMwSGUBgHJiwgApoZ7pKkVLD0syndk5urnDVx"
+  config.twitter.key = ENV["config_twitter_key"]
+  config.twitter.secret = ENV["config_twitter_secret"]
   config.twitter.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=twitter"
   config.twitter.user_info_mapping = {:email => "screen_name"}
 
