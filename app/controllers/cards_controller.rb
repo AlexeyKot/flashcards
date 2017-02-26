@@ -2,7 +2,7 @@ class CardsController < ApplicationController
 	before_action :get_params
 	skip_before_action :get_params, only: [:new, :create, :index, :random, :check]
 	def index
-		@cards = Card.all
+		@cards = current_user.cards.all
 	end
 
 	def random
