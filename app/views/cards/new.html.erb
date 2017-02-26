@@ -7,6 +7,7 @@
     <%= simple_form_for @card do |f| %>
     <%= f.input :original_text, label: 'Слово на английском', error: 'Поле обязательно к заполнению' %>
     <%= f.input :translated_text, label: 'Перевод слова на русский', error: 'Поле обязательно к заполнению' %>
+    <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
     <%= f.submit 'Создать' %>
     <% end %>
   </div>

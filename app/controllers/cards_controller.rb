@@ -10,19 +10,19 @@ class CardsController < ApplicationController
 	end
 
 	def new
-		@card = Card.new
+		@card = current_user.cards.new
 	end
 
 	def edit
 	end
 
 	def create
-		@card = Card.create(card_params)
+		@card = current_user.cards.create(card_params)
 		if @card.persisted?
 			flash[:success] = 'Карточка создана'
 			redirect_to @card
 		else
-			flash[:danger] = 'Ошибка при создании карты' 
+			flash[:danger] = 'Ошибка при создании карты'
 			render 'new'
 		end
 	end
@@ -47,7 +47,7 @@ class CardsController < ApplicationController
 			flash[:warning] = 'Не удалось удалить карточку'
 		end
 		redirect_to cards_path
-		
+
 	end
 
 	def check
@@ -68,6 +68,6 @@ class CardsController < ApplicationController
 	end
 
 	def card_params
-		params.require(:card).permit(:original_text, :translated_text)
+		params.require(:card).permit(:original_text, :translated_text, :user_id)
 	end
 end
