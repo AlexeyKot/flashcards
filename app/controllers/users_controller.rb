@@ -4,6 +4,9 @@ class UsersController < ApplicationController
         @user = User.new
     end
 
+    def edit
+  	end
+
     def create
         @user = User.create(user_params)
         if @user.persisted?
@@ -13,6 +16,16 @@ class UsersController < ApplicationController
         else
             render 'new'
         end
+    end
+
+    def update
+      if @user.update(user_params)
+        flash[:success] = 'Профиль обновлен'
+        redirect_to @card
+      else
+        flash[:danger] = 'Ошибка при обновлении профиля'
+        render 'edit'
+      end
     end
 
     private
