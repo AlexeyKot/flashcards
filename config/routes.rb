@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 			post 'check'
 		end
 	end
-	resources :users, only: [:new, :create]
+	resources :users, only: [:new, :create, :edit]
 	resources :sessions, only: [:new, :create, :destroy]
 	root 'cards#random'
 	get 'static_pages/home'
