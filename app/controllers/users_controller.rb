@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     end
 
     def edit
+      @user = User.find(params[:id])
   	end
 
     def create
@@ -19,9 +20,10 @@ class UsersController < ApplicationController
     end
 
     def update
+      @user = User.find(params[:id])
       if @user.update(user_params)
         flash[:success] = 'Профиль обновлен'
-        redirect_to @card
+        redirect_to edit_user_path(@user)
       else
         flash[:danger] = 'Ошибка при обновлении профиля'
         render 'edit'
@@ -31,6 +33,6 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:email, :password, :password_confirmation)
+        params.require(:user).permit(:email, :password, :password_confirmation, :id)
     end
 end
