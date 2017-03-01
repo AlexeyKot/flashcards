@@ -6,7 +6,7 @@ class CardsController < ApplicationController
 	end
 
 	def random
-		@card = Card.expired.random.first
+		@card = current_user.cards.expired.random.first
 	end
 
 	def new
