@@ -4,8 +4,20 @@ describe Card, type: :model do
 
 	it { should belong_to :user }
 
+	it "should create card with a user" do
+		user = User.create(email: "test@tester.ru", password: "123456", id: 1)
+		card = Card.create(original_text: "Three", translated_text: "Три", user_id: 1)
+		expect(card).to be_valid
+	end
+
+	it "should't create card without a user" do
+		user = User.create(email: "test@tester.ru", password: "123456", id: nil)
+		card = Card.create(original_text: "Three", translated_text: "Три")
+		expect(card).to be_invalid
+	end
+
 	it "shouldn't contain same pair of words" do
-		card = Card.create(original_text: "Cat ", translated_text: "  cat")
+		card = Card.create(original_text: "Cat ", translated_text: "  cat", user_id: 1)
 		expect(card).to be_invalid
 	end
 

@@ -2,27 +2,27 @@ class CardsController < ApplicationController
 	before_action :get_params
 	skip_before_action :get_params, only: [:new, :create, :index, :random, :check]
 	def index
-		@cards = Card.all
+		@cards = current_user.cards.all
 	end
 
 	def random
-		@card = Card.expired.random.first
+		@card = current_user.cards.expired.random.first
 	end
 
 	def new
-		@card = Card.new
+		@card = current_user.cards.new
 	end
 
 	def edit
 	end
 
 	def create
-		@card = Card.create(card_params)
+		@card = current_user.cards.create(card_params)
 		if @card.persisted?
 			flash[:success] = 'Карточка создана'
 			redirect_to @card
 		else
-			flash[:danger] = 'Ошибка при создании карты' 
+			flash[:danger] = 'Ошибка при создании карты'
 			render 'new'
 		end
 	end
@@ -47,7 +47,7 @@ class CardsController < ApplicationController
 			flash[:warning] = 'Не удалось удалить карточку'
 		end
 		redirect_to cards_path
-		
+
 	end
 
 	def check
@@ -68,6 +68,6 @@ class CardsController < ApplicationController
 	end
 
 	def card_params
-		params.require(:card).permit(:original_text, :translated_text)
+		params.require(:card).permit(:original_text, :translated_text, :user_id)
 	end
 end

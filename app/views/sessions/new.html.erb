@@ -1,0 +1,16 @@
+<div class="row">
+	<div class="col-md-4 col-md-offset-4">
+		<div class="text-center">
+			<%= render partial: 'flashes' %>
+			<h1>Войти</h1>
+		</div>
+		<%= simple_form_for(:session, :url => sessions_path) do |f| %>
+			<%= f.input :email, input_html: { name: "email" }, label: false, placeholder: 'Ваш эл.адрес', error: 'Поле обязательно к заполнению' %>
+			<%= f.input :password, input_html: { name: "password" }, label: false, placeholder: 'Пароль', error: 'Поле обязательно к заполнению' %>
+			<%= f.input :remember_me, as: :boolean, inline_label: 'Запомнить меня', input_html: { name: "remember_me" } %>
+			<%= f.submit 'Войти' %>
+		<% end %>
+		<%= link_to 'Login with Twitter', auth_at_provider_path(:provider => :twitter) %> | 
+	</div>
+</div>
+</div>
